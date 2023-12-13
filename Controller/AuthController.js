@@ -3,10 +3,8 @@ import User from "../Models/User-Model.js";
 import { BcryptPassword, ComparePassword } from "../Middleware/Bcrypt.js";
 import { generateToken } from "../Middleware/Auth.js";
 
-
 export const register = async (req, res) => {
   const { username, password, type } = req.body;
-  console.log(username, password, type )
   if (!username || !password || !["buyer", "seller"].includes(type))
     return res.status(400).json({ message: "Invalid user details" });
 
@@ -36,15 +34,14 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, type } = req.body;
 
   try {
-    if (!username || !password)
+    if (!username || !password || !type)
       return res.status(400).json({ message: "Invalid credentials" });
 
-    const user = await User.findOne({ username: username.toLowerCase() });
-    if (!user)
-      return res.status(400).json({ message: "User Couldnt find" });
+    const user = await User.findOne({ username: username.toLowerCase(), type });
+    if (!user) return res.status(400).json({ message: "User Couldnt find" });
 
     const passwordMatch = await ComparePassword(password, user.password);
     if (!passwordMatch) {
