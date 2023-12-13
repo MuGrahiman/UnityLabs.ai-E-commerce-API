@@ -1,7 +1,7 @@
-import Order from "../models/Order";
-import User from "../models/User";
-import Catalog from "../models/Catalog";
-import Product from "../models/Product";
+import Order from "../Models/Order-Model.js";
+import User from "../Models/User-Model.js";
+import Catalog from "../Models/Catelog-Model.js"
+import Product from "../Models/Product-Model.js";
 
 export const createOrder = async (req, res) => {
   const buyerId = req.userId;

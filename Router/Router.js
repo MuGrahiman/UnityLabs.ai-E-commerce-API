@@ -3,13 +3,13 @@ import {
   getListOfSellers,
   login,
   register,
-} from "../Controller/AuthController";
+} from "../Controller/AuthController.js";
 import {
   createCatalog,
   getSellerCatalog,
-} from "../Controller/CatelogController";
-import { createOrder, getSellerOrders } from "../Controller/OrderController";
-import auth from "../Middleware/Auth";
+} from "../Controller/CatelogController.js";
+import { createOrder, getSellerOrders } from "../Controller/OrderController.js";
+import auth from "../Middleware/Auth.js";
 const router = express.Router();
 
 router.post("/auth/register", register);

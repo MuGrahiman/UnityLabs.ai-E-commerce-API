@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import User from "../models/User"; 
-import { BcryptPassword, ComparePassword } from "../Middleware/Bcrypt";
+import User from "../Models/User-Model.js";
+import { BcryptPassword, ComparePassword } from "../Middleware/Bcrypt.js";
 
 const generateToken = (userId) => {
   return jwt.sign({ userId }, "your-secret-key", { expiresIn: "1h" });
@@ -8,9 +8,14 @@ const generateToken = (userId) => {
 
 export const register = async (req, res) => {
   const { username, password, type } = req.body;
+  if (!username || !password || !["buyer", "seller"].includes(type))
+    return res.status(400).json({ message: "Invalid user details" });
 
   try {
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({
+      username: username.toLowerCase(),
+      type,
+    });
     if (existingUser) {
       return res.status(400).json({ message: "Username already taken" });
     }
@@ -18,7 +23,7 @@ export const register = async (req, res) => {
     const hashedPassword = await BcryptPassword(password);
 
     const newUser = new User({
-      username,
+      username: username.toLowerCase(),
       password: hashedPassword,
       type,
     });
@@ -37,7 +42,7 @@ export const login = async (req, res) => {
 
   try {
     const user = await User.findOne({ username });
-    if (!user||!password) {
+    if (!user || !password) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
@@ -53,10 +58,9 @@ export const login = async (req, res) => {
   }
 };
 
-
 export const getListOfSellers = async (req, res) => {
   try {
-    const sellers = await User.find({ type: 'seller' });
+    const sellers = await User.find({ type: "seller" });
 
     const sellerList = sellers.map((seller) => ({
       username: seller.username,
@@ -65,6 +69,6 @@ export const getListOfSellers = async (req, res) => {
 
     res.status(200).json(sellerList);
   } catch (error) {
-    res.status(500).json({ message: error.message || 'Server issue' });
+    res.status(500).json({ message: error.message || "Server issue" });
   }
 };

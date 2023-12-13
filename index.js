@@ -13,7 +13,7 @@ app.get("/", (req, res) => res.send("get in the server"));
 app.use('/api',Router)
 
 mongoose
-  .connect(process.env.CONNECTION_URL)
+  .connect(process.env.CONNECTION_URL) 
   .then((result) => console.log("Data Base Connected Successfully"))
   .catch((err) => console.log(err));
-app.listen(PORT, () => console.log(`server start to run on port no ${PORT}`));
+app.listen(PORT, () => console.log(`server start to run on port no:${PORT}`));

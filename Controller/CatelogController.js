@@ -1,6 +1,6 @@
-import Catalog from '../Model/Catelog-Model';
-import Product from '../models/Product';
-import User from '../models/User';
+import Catalog from '../Models/Catelog-Model.js';
+import Product from '../Models/Product-Model.js';
+import User from '../Models/User-Model.js';
 
 export const createCatalog = async (req, res) => {
   const sellerId = req.userId; 
