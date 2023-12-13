@@ -32,11 +32,11 @@ export const createCatalog = async (req, res) => {
 
 export const getSellerCatalog = async (req, res) => {
   const buyerId = req.userId;
-  const sellerId = req.params.sellerId;
-
+  const sellerId = req.params.seller_id;
   try {
     const seller = await User.findById(sellerId);
-    if (!seller || seller.type !== "seller") {
+console.log(seller)
+if (!seller || seller.type !== "seller") {
       return res.status(404).json({ message: "Seller not found" });
     }
 
