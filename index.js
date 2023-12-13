@@ -2,13 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import Router from './Router/Router.js'
+import morgan from "morgan";
 
 dotenv.config();
 const PORT = process.env.PORT;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+app.use(morgan('dev'))
 app.get("/", (req, res) => res.send("get in the server"));
 app.use('/api',Router)
 

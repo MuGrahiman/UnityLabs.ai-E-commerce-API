@@ -5,9 +5,11 @@ import User from '../Models/User-Model.js';
 export const createCatalog = async (req, res) => {
   const sellerId = req.userId; 
   const { items } = req.body;
+  console.log(req.body);
 
   try {
     const seller = await User.findById(sellerId);
+    console.log(seller);
     if (!seller || seller.type !== 'seller') return res.status(401).json({ message: 'Unauthorized' });
     
 

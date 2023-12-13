@@ -1,13 +1,12 @@
 import jwt from "jsonwebtoken";
 import User from "../Models/User-Model.js";
 import { BcryptPassword, ComparePassword } from "../Middleware/Bcrypt.js";
+import { generateToken } from "../Middleware/Auth.js";
 
-const generateToken = (userId) => {
-  return jwt.sign({ userId }, "your-secret-key", { expiresIn: "1h" });
-};
 
 export const register = async (req, res) => {
   const { username, password, type } = req.body;
+  console.log(username, password, type )
   if (!username || !password || !["buyer", "seller"].includes(type))
     return res.status(400).json({ message: "Invalid user details" });
 
@@ -16,9 +15,8 @@ export const register = async (req, res) => {
       username: username.toLowerCase(),
       type,
     });
-    if (existingUser) {
+    if (existingUser)
       return res.status(400).json({ message: "Username already taken" });
-    }
 
     const hashedPassword = await BcryptPassword(password);
 
@@ -41,10 +39,12 @@ export const login = async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ username });
-    if (!user || !password) {
+    if (!username || !password)
       return res.status(400).json({ message: "Invalid credentials" });
-    }
+
+    const user = await User.findOne({ username: username.toLowerCase() });
+    if (!user)
+      return res.status(400).json({ message: "User Couldnt find" });
 
     const passwordMatch = await ComparePassword(password, user.password);
     if (!passwordMatch) {
