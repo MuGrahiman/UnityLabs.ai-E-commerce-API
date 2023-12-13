@@ -23,8 +23,10 @@ Sellers can retrieve a list of orders they've received.
 
 ### Installation
 
-- Clone the repository: git clone https://github.com/MuGrahiman/UnityLabs.ai-E-commerce-API.git
-- Install dependencies: npm install
+- Clone the repository:
+  git clone https://github.com/MuGrahiman/UnityLabs.ai-E-commerce-API.git
+- Install dependencies:
+  npm install
 
 ### Configuration
 
@@ -107,7 +109,7 @@ To deploy this Node.js project, follow these steps:
 3. **Run the Application:**
    npm start || node index.js
 4. **Access the API:**
-   The API should now be running on your port no Access it using the specified endpoint, for example: http://localhost:your port no.
+   The API should now be running on your port no Access it using the specified endpoint, for example: http://localhost:your_port_no.
 
 ## Built With
 
@@ -121,4 +123,3 @@ To deploy this Node.js project, follow these steps:
 - [mongoose](https://www.npmjs.com/package/mongoose) - MongoDB object modeling tool
 - [morgan](https://www.npmjs.com/package/morgan) - HTTP request logger middleware
 - [nodemon](https://www.npmjs.com/package/nodemon) - Utility that monitors for changes and automatically restarts the server
-
