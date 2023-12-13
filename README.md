@@ -23,7 +23,7 @@ Sellers can retrieve a list of orders they've received.
 
 ### Installation
 
-- Clone the repository: git clone https://github.com/MuGrahiman/UnityLabs.ai_backend.git
+- Clone the repository: git clone https://github.com/MuGrahiman/UnityLabs.ai-E-commerce-API.git
 - Install dependencies: npm install
 
 ### Configuration
