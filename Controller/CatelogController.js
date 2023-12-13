@@ -35,7 +35,6 @@ export const getSellerCatalog = async (req, res) => {
   const sellerId = req.params.seller_id;
   try {
     const seller = await User.findById(sellerId);
-console.log(seller)
 if (!seller || seller.type !== "seller") {
       return res.status(404).json({ message: "Seller not found" });
     }
