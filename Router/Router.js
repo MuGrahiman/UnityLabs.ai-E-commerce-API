@@ -20,6 +20,6 @@ router.get("/buyer/seller-catalog/:seller_id", getSellerCatalog);
 router.post("/buyer/create-order/:seller_id", auth, createOrder);
 
 router.post("/seller/create-catalog", auth, createCatalog);
-router.get("/seller/orders", getSellerOrders);
+router.get("/seller/orders",auth, getSellerOrders);
 
 export default router;
